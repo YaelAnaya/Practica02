@@ -5,7 +5,9 @@
  */
 package testgraphics;
 
+import java.awt.Color;
 import java.util.ArrayList;
+import javax.swing.JColorChooser;
 
 /**
  *
@@ -16,6 +18,8 @@ public class DemoFrame extends javax.swing.JFrame {
     private boolean isPolygonClicked;
     private ArrayList<Integer> xPoints;
     private ArrayList<Integer> yPoints;
+    private Color color;
+    private boolean isInverted;
     
     public DemoFrame() {
         initComponents();
@@ -42,8 +46,9 @@ public class DemoFrame extends javax.swing.JFrame {
         polygonButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         drawButton = new javax.swing.JButton();
-        clearButton = new javax.swing.JButton();
+        invertedButton = new javax.swing.JButton();
         ToggleButton = new javax.swing.JToggleButton();
+        clearButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Demo");
@@ -59,37 +64,37 @@ public class DemoFrame extends javax.swing.JFrame {
         });
 
         squareButton.setText("Cuadrado");
-        squareButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                squareButtonMouseClicked(evt);
+        squareButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                squareButtonActionPerformed(evt);
             }
         });
 
         circleButton.setText("Círculo");
-        circleButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                circleButtonMouseClicked(evt);
+        circleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                circleButtonActionPerformed(evt);
             }
         });
 
         triangleButton.setText("Tríangulo");
-        triangleButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                triangleButtonMouseClicked(evt);
+        triangleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                triangleButtonActionPerformed(evt);
             }
         });
 
         spiralButton.setText("Espiral");
-        spiralButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                spiralButtonMouseClicked(evt);
+        spiralButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                spiralButtonActionPerformed(evt);
             }
         });
 
         polygonButton.setText("Poligono");
-        polygonButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                polygonButtonMouseClicked(evt);
+        polygonButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                polygonButtonActionPerformed(evt);
             }
         });
 
@@ -128,20 +133,20 @@ public class DemoFrame extends javax.swing.JFrame {
         jPanel1.setLayout(flowLayout1);
 
         drawButton.setText("Dibujar");
-        drawButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                drawButtonMouseClicked(evt);
+        drawButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                drawButtonActionPerformed(evt);
             }
         });
         jPanel1.add(drawButton);
 
-        clearButton.setText("Limpiar");
-        clearButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                clearButtonMouseClicked(evt);
+        invertedButton.setText("Dibujar de manera inversa");
+        invertedButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                invertedButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(clearButton);
+        jPanel1.add(invertedButton);
 
         ToggleButton.setText("Solo figuras dentro de los limites");
         ToggleButton.addActionListener(new java.awt.event.ActionListener() {
@@ -151,6 +156,14 @@ public class DemoFrame extends javax.swing.JFrame {
         });
         jPanel1.add(ToggleButton);
         ToggleButton.getAccessibleContext().setAccessibleName("ToggleButton");
+
+        clearButton.setText("Limpiar");
+        clearButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(clearButton);
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
@@ -182,44 +195,11 @@ public class DemoFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void squareButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_squareButtonMouseClicked
-        // TODO add your handling code here:
-        DataJDialog data = new DataJDialog(this, true, false);
-        data.setVisible(true);
-        panel.addSquare(data.getxPositionTextField(), data.getyPositionTextField(), data.getSizeTextField());
-    }//GEN-LAST:event_squareButtonMouseClicked
-
-    private void circleButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_circleButtonMouseClicked
-        // TODO add your handling code here:
-        DataJDialog data = new DataJDialog(this, true, false);
-        data.setVisible(true);
-        panel.addCircle(data.getxPositionTextField(), data.getyPositionTextField(), data.getSizeTextField());
-    }//GEN-LAST:event_circleButtonMouseClicked
-
-    private void triangleButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_triangleButtonMouseClicked
-        // TODO add your handling code here:
-        DataJDialog data = new DataJDialog(this, true, false);
-        data.setVisible(true);
-        panel.addTriangle(data.getxPositionTextField(), data.getyPositionTextField(), data.getSizeTextField());
-    }//GEN-LAST:event_triangleButtonMouseClicked
-
-    private void spiralButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_spiralButtonMouseClicked
-        // TODO add your handling code here:
-        DataJDialog data = new DataJDialog(this, true, true);
-        data.setVisible(true);
-        panel.addSpiral(data.getxPositionTextField(), data.getyPositionTextField(), data.getSizeTextField(), data.getIncrementTextField(), data.getRadiumTextField());
-
-    }//GEN-LAST:event_spiralButtonMouseClicked
-
-    private void polygonButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_polygonButtonMouseClicked
-        // TODO add your handling code here:
-        isPolygonClicked = true;
-    }//GEN-LAST:event_polygonButtonMouseClicked
-
     private void panel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel1MouseClicked
         // TODO add your handling code here:
 
         if(isPolygonClicked){
+
 
             if(evt.getClickCount() == 1){
 
@@ -230,10 +210,11 @@ public class DemoFrame extends javax.swing.JFrame {
 
             }
             else if(evt.getClickCount() == 2){
+                color = JColorChooser.showDialog(this, "Seleccione el color de su figura", color.BLACK);
                 xPoints.add(xPoints.get(0));
                 yPoints.add(yPoints.get(0));
-                panel.drawIrregularPolygon(xPoints, yPoints);
-                panel.addIrregularPolygon(xPoints, yPoints);
+                panel.addIrregularPolygon(xPoints, yPoints, color);
+                panel.drawFigures(isInverted);
                 xPoints.clear();
                 yPoints.clear();
                 isPolygonClicked = false;
@@ -243,20 +224,62 @@ public class DemoFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_panel1MouseClicked
 
-    private void drawButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_drawButtonMouseClicked
-        // TODO add your handling code here:
-        panel.drawFigures();
-    }//GEN-LAST:event_drawButtonMouseClicked
-
-    private void clearButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearButtonMouseClicked
-        // TODO add your handling code here:
-        panel.clear();
-        repaint();
-    }//GEN-LAST:event_clearButtonMouseClicked
-
     private void ToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ToggleButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ToggleButtonActionPerformed
+
+    private void invertedButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invertedButtonActionPerformed
+        // TODO add your handling code here:
+
+        isInverted = false;
+        panel.drawFigures(isInverted);
+        
+    }//GEN-LAST:event_invertedButtonActionPerformed
+
+    private void polygonButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_polygonButtonActionPerformed
+        // TODO add your handling code here:
+        isPolygonClicked = true;
+    }//GEN-LAST:event_polygonButtonActionPerformed
+
+    private void spiralButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_spiralButtonActionPerformed
+        // TODO add your handling code here:
+        DataJDialog data = new DataJDialog(this, true, true);
+        data.setVisible(true);
+        panel.addSpiral(data.getxPositionTextField(), data.getyPositionTextField(), data.getSizeTextField(), data.getIncrementTextField(), data.getRadiumTextField(),  data.getColor());
+    }//GEN-LAST:event_spiralButtonActionPerformed
+
+    private void triangleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_triangleButtonActionPerformed
+        // TODO add your handling code here:
+        DataJDialog data = new DataJDialog(this, true, false);
+        data.setVisible(true);
+        panel.addTriangle(data.getxPositionTextField(), data.getyPositionTextField(), data.getSizeTextField(), data.getColor());
+    }//GEN-LAST:event_triangleButtonActionPerformed
+
+    private void circleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_circleButtonActionPerformed
+        // TODO add your handling code here:
+        DataJDialog data = new DataJDialog(this, true, false);
+        data.setVisible(true);
+        panel.addCircle(data.getxPositionTextField(), data.getyPositionTextField(), data.getSizeTextField(), data.getColor());
+    }//GEN-LAST:event_circleButtonActionPerformed
+
+    private void squareButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_squareButtonActionPerformed
+        // TODO add your handling code here:
+        DataJDialog data = new DataJDialog(this, true, false);
+        data.setVisible(true);
+        panel.addSquare(data.getxPositionTextField(), data.getyPositionTextField(), data.getSizeTextField(), data.getColor());
+    }//GEN-LAST:event_squareButtonActionPerformed
+
+    private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
+        // TODO add your handling code here:
+        panel.clear();
+        repaint();
+    }//GEN-LAST:event_clearButtonActionPerformed
+
+    private void drawButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drawButtonActionPerformed
+        // TODO add your handling code here:
+        isInverted = true;
+        panel.drawFigures(isInverted);
+    }//GEN-LAST:event_drawButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -298,6 +321,7 @@ public class DemoFrame extends javax.swing.JFrame {
     private javax.swing.JButton circleButton;
     private javax.swing.JButton clearButton;
     private javax.swing.JButton drawButton;
+    private javax.swing.JButton invertedButton;
     private javax.swing.JPanel jPanel1;
     private testgraphics.TestGraphics panel;
     private testgraphics.TestGraphics panel1;

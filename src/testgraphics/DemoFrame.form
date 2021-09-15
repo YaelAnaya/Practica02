@@ -118,7 +118,7 @@
                 <Property name="text" type="java.lang.String" value="Cuadrado"/>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="squareButtonMouseClicked"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="squareButtonActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="circleButton">
@@ -126,7 +126,7 @@
                 <Property name="text" type="java.lang.String" value="C&#xed;rculo"/>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="circleButtonMouseClicked"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="circleButtonActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="triangleButton">
@@ -134,7 +134,7 @@
                 <Property name="text" type="java.lang.String" value="Tr&#xed;angulo"/>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="triangleButtonMouseClicked"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="triangleButtonActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="spiralButton">
@@ -142,7 +142,7 @@
                 <Property name="text" type="java.lang.String" value="Espiral"/>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="spiralButtonMouseClicked"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="spiralButtonActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="polygonButton">
@@ -150,7 +150,7 @@
                 <Property name="text" type="java.lang.String" value="Poligono"/>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="polygonButtonMouseClicked"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="polygonButtonActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
@@ -162,15 +162,15 @@
                 <Property name="text" type="java.lang.String" value="Dibujar"/>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="drawButtonMouseClicked"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="drawButtonActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="clearButton">
+            <Component class="javax.swing.JButton" name="invertedButton">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Limpiar"/>
+                <Property name="text" type="java.lang.String" value="Dibujar de manera inversa"/>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="clearButtonMouseClicked"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="invertedButtonActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JToggleButton" name="ToggleButton">
@@ -182,6 +182,14 @@
               </AccessibilityProperties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ToggleButtonActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="clearButton">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Limpiar"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clearButtonActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
@@ -250,11 +258,11 @@
                 <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
               </StatementProvider>
               <Parameters>
-                <CodeExpression id="5_clearButton">
-                  <CodeVariable name="clearButton" type="8194" declaredType="javax.swing.JButton"/>
+                <CodeExpression id="5_invertedButton">
+                  <CodeVariable name="invertedButton" type="8194" declaredType="javax.swing.JButton"/>
                   <ExpressionOrigin>
                     <ExpressionProvider type="ComponentRef">
-                      <ComponentRef name="clearButton"/>
+                      <ComponentRef name="invertedButton"/>
                     </ExpressionProvider>
                   </ExpressionOrigin>
                 </CodeExpression>
@@ -271,6 +279,22 @@
                   <ExpressionOrigin>
                     <ExpressionProvider type="ComponentRef">
                       <ComponentRef name="ToggleButton"/>
+                    </ExpressionProvider>
+                  </ExpressionOrigin>
+                </CodeExpression>
+              </Parameters>
+            </CodeStatement>
+            <CodeStatement>
+              <CodeExpression id="3_jPanel1"/>
+              <StatementProvider type="CodeMethod">
+                <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+              </StatementProvider>
+              <Parameters>
+                <CodeExpression id="7_clearButton">
+                  <CodeVariable name="clearButton" type="8194" declaredType="javax.swing.JButton"/>
+                  <ExpressionOrigin>
+                    <ExpressionProvider type="ComponentRef">
+                      <ComponentRef name="clearButton"/>
                     </ExpressionProvider>
                   </ExpressionOrigin>
                 </CodeExpression>

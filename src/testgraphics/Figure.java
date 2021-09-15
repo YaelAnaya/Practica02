@@ -5,24 +5,29 @@
  */
 package testgraphics;
 
+import java.awt.*;
 /**
  *
  * @author yaelanaya
  */
-public class Figures {
+public abstract class Figure {
+    /**
+    * Atributos de la clase figuras.
+    */
+
     protected int xPosition;
     protected int yPosition;
     protected int size;
-   /**
-    * Estos atributos guardan los valores de los puntos X e Y
-    * que necesitamos, para dibujar un poligono con la
-    * funcion drawPolygon de la clase Grapichs.
-    */
-
-    public Figures(int xPosition, int yPosition, int size) {
+    protected Color color;
+    
+    /**
+     *Constrcutor
+     */
+    public Figure(int xPosition, int yPosition, int size, Color color) {
         this.xPosition = xPosition;
         this.yPosition = yPosition;
         this.size = size;
+        this.color = color;
     }
 
  
@@ -39,6 +44,15 @@ public class Figures {
     public int getSize() {
         return size;
     }
+
+    public Color getColor() {
+        return color;
+    }
+    
+    /**
+     * Este método abstracto se utilizará para dibujar las diferentes figuras
+     */
+    public abstract void drawFigure(Graphics g);
 
   
       

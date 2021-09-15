@@ -4,19 +4,19 @@
  * and open the template in the editor.
  */
 package testgraphics;
-import java.awt.Graphics;
+import java.awt.*;
 /**
  *Con esta clase lo que buscamos es modelar una espiral, para
  * poderla dibujar en el canvas en un futuro.
  * @author yaelanaya
  */
-public class Spiral extends Figures {
+public class Spiral extends Figure {
     
     private int increment;
     private int initialRadium;
     
-    public Spiral(int xPosition, int yPosition, int size, int increment, int initialRadium) {
-        super(xPosition, yPosition, size);
+    public Spiral(int xPosition, int yPosition, int size, int increment, int initialRadium, Color color) {
+        super(xPosition, yPosition, size, color);
         this.increment = increment;
         this.initialRadium = initialRadium;
     }
@@ -29,6 +29,17 @@ public class Spiral extends Figures {
 
     public int getInitialRadium() {
         return initialRadium;
+    }
+
+    @Override
+    public void drawFigure(Graphics g) {
+      g.setColor(color);
+      initialRadium = 0;
+      for(int i = 0; i < size; i++){
+            g.drawArc(xPosition - initialRadium, yPosition - initialRadium, 2 * initialRadium, 2 * initialRadium, 0, 180);
+            initialRadium += increment;
+            g.drawArc(xPosition - initialRadium, yPosition - initialRadium, 2 * initialRadium - increment, 2 * initialRadium, 180, 180);
+        } 
     }
   
 }

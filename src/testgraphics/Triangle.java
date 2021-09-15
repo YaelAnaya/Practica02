@@ -5,11 +5,13 @@
  */
 package testgraphics;
 
+import java.awt.*;
+
 /**
  *
  * @author yaelanaya
  */
-public class Triangle extends Figures{
+public class Triangle extends Figure{
     
     /**
     * Estos atributos guardan los valores de los puntos X e Y
@@ -22,8 +24,8 @@ public class Triangle extends Figures{
     /**
      * Este constrcutor es utilizado para crear al Triangulo.
      */
-    public Triangle(int xPosition, int yPosition, int size) {
-        super(xPosition, yPosition, size);
+    public Triangle(int xPosition, int yPosition, int size, Color color) {
+        super(xPosition, yPosition, size, color);
         
     }
     
@@ -56,6 +58,17 @@ public class Triangle extends Figures{
         yPoints[1] = (int)(yPosition + Math.sqrt(Math.pow(size, 2) - Math.pow(size/2, 2)));
         yPoints[2] = yPoints[1];
         return yPoints;
+    }
+
+      /**
+     * Con este método dibujamos el triangulo
+     * Recibe como parametros los arrays de los puntos calculados en x e y
+     * @param g es el hambiente grafico en el que se dibujará la figura
+     */
+    @Override
+    public void drawFigure(Graphics g) {
+        g.setColor(color);
+        g.fillPolygon(getXPointsTriangle(),getYPointsTriangle(), 3);
     }
     
 }

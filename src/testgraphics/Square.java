@@ -4,19 +4,26 @@
  * and open the template in the editor.
  */
 package testgraphics;
-import java.awt.Graphics;
+import java.awt.*;
 
 /**
  *Con esta clase buscamos modelar un cuadrado para posteriormente
  * dibujarlo en nuestro Canvas.
  * @author yaelanaya
  */
-public class Square extends Figures {
+public class Square extends Figure {
     /**
      * Heredamos los atributos de la clase padre Figures.
      */
-    public Square(int xPosition, int yPosition, int side) {
-        super(xPosition, yPosition, side);
+    public Square(int xPosition, int yPosition, int side, Color color) {
+        super(xPosition, yPosition, side, color);
     }
+
+    @Override
+    public void drawFigure(Graphics g) {
+        g.setColor(color);
+        g.fillRect(xPosition, yPosition, size, size);
+    }
+    
     
 }

@@ -8,33 +8,24 @@ package testgraphics;
 import java.awt.*;
 
 /**
- *
  * @author yaelanaya
  */
 public class Triangle extends Figure {
 
-    /**
-     * Estos atributos guardan los valores de los puntos X e Y que necesitamos,
-     * para dibujar un poligono con la funcion drawPolygon de la clase Grapichs.
-     */
-    private int[] xPoints = new int[3];;
-    private int[] yPoints = new int[3];;
+    private int[] xPoints = new int[3];
+    private int[] yPoints = new int[3];
 
-    /**
-     * Este constrcutor es utilizado para crear al Triangulo.
-     */
+     // Llamamos en el constructor los metodos que calculan los puntos en X e Y que se necesitan
+     // para poder dibujar las figuras.
+     
     public Triangle(int xPosition, int yPosition, int size, Color color) {
-        super(xPosition, yPosition, size, color); 
+        super(xPosition, yPosition, size, color);
         getXPointsTriangle();
         getYPointsTriangle();
     }
 
-    /**
-     * Con este metodo calculamos los puntos de x, para poder dibujar el
-     * Triangulo equilatero.
-     *
-     * @return el vector con los valores de los puntos de X
-     */
+    //Con este metodo calculamos los puntos de X, para poder dibujar el
+    //Triangulo equilatero.
     public void getXPointsTriangle() {
         //Guardamos el punto incial X.
         xPoints[0] = xPosition;
@@ -44,12 +35,8 @@ public class Triangle extends Figure {
         xPoints[2] = xPosition - (size / 2);
     }
 
-    /**
-     * Con este metodo calculamos los puntos de x, para poder dibujar el
-     * Triangulo equilatero.
-     *
-     * @return el vector con los valores de los puntos de Y
-     */
+    //Con este metodo calculamos los puntos de Y, para poder dibujar el
+    //Triangulo equilatero.
     public void getYPointsTriangle() {
         //Guardamos el punto incial Y.
         yPoints[0] = yPosition;
@@ -58,12 +45,8 @@ public class Triangle extends Figure {
         yPoints[2] = yPoints[1];
     }
 
-    /**
-     * Con este método dibujamos el triangulo Recibe como parametros los arrays
-     * de los puntos calculados en x e y
-     *
-     * @param g es el hambiente grafico en el que se dibujará la figura
-     */
+    // Sobreescribimos los métodos para poder dibujar las figuras y
+    // validar si están fuera de los límites.
     @Override
     public void drawFigure(Graphics g) {
         g.setColor(color);
@@ -77,9 +60,8 @@ public class Triangle extends Figure {
         edgeX = xPoints[1];
         edgeX2 = xPoints[2];
         edgeY = yPoints[1];
-  
 
-        return edgeX > xLimit || edgeY > yLimit || edgeX2 < 0 ;
+        return edgeX > xLimit || edgeY > yLimit || edgeX2 < 0;
     }
 
 }

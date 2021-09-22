@@ -6,34 +6,25 @@
 package testgraphics;
 
 import java.awt.*;
+
 /**
- *
  * @author yaelanaya
  */
 public abstract class Figure {
-    /**
-    * Atributos de la clase figuras.
-    */
 
-    protected int xPosition;
-    protected int yPosition;
-    protected int size;
-    protected Color color;
-    
-    /**
-     *Constrcutor
-     */
+    protected int xPosition; //Posición en X.
+    protected int yPosition; //Posición en Y.
+    protected int size; //Tamaño de la figura.
+    protected Color color; //Color de la figura.
+
     public Figure(int xPosition, int yPosition, int size, Color color) {
         this.xPosition = xPosition;
         this.yPosition = yPosition;
         this.size = size;
         this.color = color;
-
     }
 
- 
-    /**Getters de los atributos de la clase Figures.
-     */
+    //Getters de los atributos de la clase Figures.
     public int getxPosition() {
         return xPosition;
     }
@@ -50,15 +41,10 @@ public abstract class Figure {
         return color;
     }
 
-    
-    /**
-     * Este método abstracto se utilizará para dibujar las diferentes figuras
-     */
+    //Este método abstracto se utilizará para dibujar las diferentes figuras.
     public abstract void drawFigure(Graphics g);
-    
+
+    //Este método abstracto se utilizará validar si la figura está fuera de los límites.
     public abstract boolean isOutOfBounds(int xLimit, int yLimit);
 
-  
-      
-   
 }

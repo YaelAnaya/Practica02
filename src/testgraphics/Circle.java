@@ -8,9 +8,6 @@ package testgraphics;
 import java.awt.*;
 
 /**
- * Con esta clase buscamos modelar un circulo, para posteriormente dibujarlo en
- * nuestro Canvas.
- *
  * @author yaelanaya
  */
 public class Circle extends Figure {
@@ -19,6 +16,8 @@ public class Circle extends Figure {
         super(xPosition, yPosition, diameter, color);
     }
 
+    // Sobreescribimos los métodos para poder dibujar las figuras y
+    // validar si están fuera de los límites.
     @Override
     public void drawFigure(Graphics g) {
         g.setColor(color);

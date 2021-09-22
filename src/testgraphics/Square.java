@@ -8,20 +8,15 @@ package testgraphics;
 import java.awt.*;
 
 /**
- * Con esta clase buscamos modelar un cuadrado para posteriormente dibujarlo en
- * nuestro Canvas.
- *
  * @author yaelanaya
  */
 public class Square extends Figure {
 
-    /**
-     * Heredamos los atributos de la clase padre Figures.
-     */
     public Square(int xPosition, int yPosition, int side, Color color) {
         super(xPosition, yPosition, side, color);
     }
 
+    //Sobreescribimos los métodos para poder dibujar las figuras y validar si están fuera de los límites.
     @Override
     public void drawFigure(Graphics g) {
         g.setColor(color);

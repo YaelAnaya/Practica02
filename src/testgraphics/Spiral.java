@@ -8,9 +8,6 @@ package testgraphics;
 import java.awt.*;
 
 /**
- * Con esta clase lo que buscamos es modelar una espiral, para poderla dibujar
- * en el canvas en un futuro.
- *
  * @author yaelanaya
  */
 public class Spiral extends Figure {
@@ -24,15 +21,8 @@ public class Spiral extends Figure {
         this.initialRadium = initialRadium;
     }
 
-    //Métodos Getters de los atributos
-    public int getIncrement() {
-        return increment;
-    }
-
-    public int getInitialRadium() {
-        return initialRadium;
-    }
-
+    // Sobreescribimos los métodos para poder dibujar las figuras y
+    // validar si están fuera de los límites.
     @Override
     public void drawFigure(Graphics g) {
         g.setColor(color);

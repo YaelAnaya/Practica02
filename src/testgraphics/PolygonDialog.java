@@ -14,10 +14,11 @@ import javax.swing.JColorChooser;
  */
 public class PolygonDialog extends javax.swing.JDialog {
 
-    private int pointCounter;
+    private int pointCounter; //Contador de puntos.
+    //Lista con los puntos en x, y.
     private ArrayList<Integer> xPoints;
     private ArrayList<Integer> yPoints;
-    private Color color;
+    private Color color; //Color del poligono.
     
     public PolygonDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -26,7 +27,8 @@ public class PolygonDialog extends javax.swing.JDialog {
         xPoints = new ArrayList<>();
         yPoints = new ArrayList<>();
     }
-
+    
+    //Getters y Setters.
     public ArrayList<Integer> getxPoints() {
         return xPoints;
     }
@@ -124,7 +126,7 @@ public class PolygonDialog extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    //Elimina los puntos capturados y repinta el panel.
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
         xPoints.clear();
         yPoints.clear();
@@ -132,6 +134,12 @@ public class PolygonDialog extends javax.swing.JDialog {
         repaint();
     }//GEN-LAST:event_clearButtonActionPerformed
 
+    /** Capturamos los puntos y verificamos la cantidad de clicks
+     * si es un solo click se siguen guardando los puntos en x e y, mostramos las lineas conectadas al usuario
+     * y aumentamos el contador de puntos de ser dos clicks, se guarda como ultimo punto el inicio, 
+     * abrimos la ventana para elegir el color y se cierra la ventana.
+     */
+     
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         if(evt.getClickCount() == 1){
             xPoints.add(evt.getX());

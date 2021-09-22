@@ -5,27 +5,26 @@
  */
 package testgraphics;
 
-import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.*;
 import java.util.ArrayList;
-import javax.swing.JColorChooser;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
 /**
- *
- * @author JorgeEduardo
+ * * @author yaelanaya
  */
 public class DemoFrame extends javax.swing.JFrame {
-
+    //Bandera que nos indica si solo se motraran las figuras dentro del limite.
     private boolean justInBounds;
 
     public DemoFrame() {
         initComponents();
         justInBounds = false;
     }
-
+    
+    //Con este método se verifica si la figura en el tope está o no dentro del límite,
+    //mostrando el estado en un TextField.
     private void showIfIsOutOfBounds() {
-        if (panel.figureonPeek()) {
+        if (panel.isPeekOutOfBounds()) {
             boundsTextField.setText("Excede Limite");
         } else {
             boundsTextField.setText("Dentro del Limite");
@@ -236,8 +235,9 @@ public class DemoFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Con este método dibujamos los elementos del Stack en sentido inverso,
+    //también verifica si se aceptan figuras fuera de los limites.
     private void invertedButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invertedButtonActionPerformed
-        // TODO add your handling code here:
         if (justInBounds)
             panel.drawinBounds(true);
 
@@ -245,26 +245,30 @@ public class DemoFrame extends javax.swing.JFrame {
             panel.drawFigures(true);
     }//GEN-LAST:event_invertedButtonActionPerformed
 
+    //Con este metodo borramos lo que está dibujado en el panel y vaciamos los Stacks.
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
-        // TODO add your handling code here:
         panel.clear();
         repaint();
         boundsTextField.setText("Sin figuras aún");
     }//GEN-LAST:event_clearButtonActionPerformed
 
+    //Con este método dibujamos los elementos del Stack,
+    //también verifica si se aceptan figuras fuera de los limites.
     private void drawButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drawButtonActionPerformed
-        // TODO add your handling code here:
-        if (justInBounds) 
+        if (justInBounds)
             panel.drawinBounds(false);
-        else 
+        else
             panel.drawFigures(false);
-        
-
-
     }//GEN-LAST:event_drawButtonActionPerformed
 
+    /**
+     * En estos eventos, se despliegan las ventanas de dialogo con las que
+     * obtenemos los datos propocionados por el usario, y con ellos creamos y
+     * guardamos las figuras correspondientes, también verificamos si están
+     * fuera de los limites.
+     */
+
     private void polygonButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_polygonButtonActionPerformed
-        // TODO add your handling code here:
         PolygonDialog polygon = new PolygonDialog(this, true);
         polygon.setVisible(true);
         panel.addIrregularPolygon(polygon.getxPoints(), polygon.getyPoints(), polygon.getPointCounter(), polygon.getColor());
@@ -273,7 +277,6 @@ public class DemoFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_polygonButtonActionPerformed
 
     private void spiralButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_spiralButtonActionPerformed
-        // TODO add your handling code here:
         DataDialog data = new DataDialog(this, true, true);
         data.setVisible(true);
         panel.addSpiral(data.getxPositionTextField(), data.getyPositionTextField(), data.getSizeTextField(), data.getIncrementTextField(), data.getRadiumTextField(), data.getColor());
@@ -281,7 +284,6 @@ public class DemoFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_spiralButtonActionPerformed
 
     private void triangleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_triangleButtonActionPerformed
-        // TODO add your handling code here:
         DataDialog data = new DataDialog(this, true, false);
         data.setVisible(true);
         panel.addTriangle(data.getxPositionTextField(), data.getyPositionTextField(), data.getSizeTextField(), data.getColor());
@@ -290,7 +292,6 @@ public class DemoFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_triangleButtonActionPerformed
 
     private void circleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_circleButtonActionPerformed
-        // TODO add your handling code here:
         DataDialog data = new DataDialog(this, true, false);
         data.setVisible(true);
         panel.addCircle(data.getxPositionTextField(), data.getyPositionTextField(), data.getSizeTextField(), data.getColor());
@@ -305,6 +306,13 @@ public class DemoFrame extends javax.swing.JFrame {
         showIfIsOutOfBounds();
     }//GEN-LAST:event_squareButtonActionPerformed
 
+    /**
+     * Con este boton lo que hacemos es verificar si está clickeado el
+     * ToogleBotton o no, si lo está solo dibuja figuras dentro de los limites y
+     * cambia la bandera, para que solo se puedan dibujar figuras en los
+     * limites, al soltar el boton se cambia la bandera a falso y ya se puede
+     * dibujar fuera de los limites.
+     */
     private void boundsToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boundsToggleButtonActionPerformed
         // TODO add your handling code here:
         if (boundsToggleButton.isSelected()) {
@@ -317,34 +325,50 @@ public class DemoFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_boundsToggleButtonActionPerformed
 
+    /**
+     * Con estas cajas lo que hacemos darle visibilidad a las figuras para poder
+     * dibujarlas, tambien se verifica si solo se pueden dibujar fuera de los
+     * limites.
+     */
+
     private void squareCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_squareCheckBoxActionPerformed
-        // TODO add your handling code here:
         panel.setSquareVisibility(squareCheckBox.isSelected());
-        panel.drawFigures(false);
+        if (justInBounds)
+            panel.drawinBounds(false);
+        else
+            panel.drawFigures(false);
     }//GEN-LAST:event_squareCheckBoxActionPerformed
 
     private void circleCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_circleCheckBoxActionPerformed
-        // TODO add your handling code here:
         panel.setCircleVisibility(circleCheckBox.isSelected());
-        panel.drawFigures(false);
+        if (justInBounds)
+            panel.drawinBounds(false);
+        else
+            panel.drawFigures(false);
     }//GEN-LAST:event_circleCheckBoxActionPerformed
 
     private void triangleCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_triangleCheckBoxActionPerformed
-        // TODO add your handling code here:
         panel.setTriangleVisibility(triangleCheckBox.isSelected());
-        panel.drawFigures(false);
+        if (justInBounds)
+            panel.drawinBounds(false);
+        else
+            panel.drawFigures(false);
     }//GEN-LAST:event_triangleCheckBoxActionPerformed
 
     private void spiralCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_spiralCheckBoxActionPerformed
-        // TODO add your handling code here:
         panel.setSpiralVisibility(spiralCheckBox.isSelected());
-        panel.drawFigures(false);
+        if (justInBounds)
+            panel.drawinBounds(false);
+        else
+            panel.drawFigures(false);
     }//GEN-LAST:event_spiralCheckBoxActionPerformed
 
     private void polygonCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_polygonCheckBoxActionPerformed
-        // TODO add your handling code here:
         panel.setPolygonVisibility(polygonCheckBox.isSelected());
-        panel.drawFigures(false);
+        if (justInBounds)
+            panel.drawinBounds(false);
+        else
+            panel.drawFigures(false);
     }//GEN-LAST:event_polygonCheckBoxActionPerformed
 
     /**

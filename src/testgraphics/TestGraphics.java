@@ -19,14 +19,16 @@ public class TestGraphics extends JPanel {
 
     private Stack<Figure> figures = new Stack<>();
     private Stack<Figure> invertedFigures = new Stack<>();
+    //Con estas bandelas booleanas verificamos si la casilla de
+    //la figura está seleccionada para poder dibujarla
     private boolean polygonVisibility = true,
-                    spiralVisibility = true, 
-                    circleVisibility = true,
-                    triangleVisibility = true,
-                    squareVisibility = true;
+            spiralVisibility = true,
+            circleVisibility = true,
+            triangleVisibility = true,
+            squareVisibility = true;
 
     /**
-     * Con estos metodos lo que hacemos es agregas las figuras al arrayList de
+     * Con estos metodos lo que hacemos es agregas las figuras al Stack de
      * Figuras, siempre y cuando los valores introducidos sean mayores a 0.
      */
     public void addTriangle(int xPosition, int yPosition, int size, Color color) {
@@ -57,6 +59,10 @@ public class TestGraphics extends JPanel {
         figures.push(new IrregularPolygon(xPosition, yPosition, size, color));
     }
 
+    /**
+     * Con estos Setters lo que se hace es cambiar la bandera booleana de
+     * visibilidad de las figuras.
+     */
     public void setPolygonVisibility(boolean polygonVisibility) {
         this.polygonVisibility = polygonVisibility;
     }
@@ -77,33 +83,40 @@ public class TestGraphics extends JPanel {
         this.squareVisibility = squareVisibility;
     }
 
-
-    /**
-     * Con este metodo vaciamos el arrayList de figuras
-     */
+    //Con este método limpiamos los Stacks.
     public void clear() {
         figures.clear();
         invertedFigures.clear();
     }
 
     /**
-     * Con este metodo dibujamos las figuras que agregamos en el arrayList
+     * Con este metodo se verifica si la figura está seleccionada en el checkbox
+     * si es así se dibujará la figura correspondiente a la clase.
      */
     public void isFigureVisibleToDraw(Figure figure) {
 
         Class classType = figure.getClass();
 
         if (classType.equals(Triangle.class) && triangleVisibility
-           || classType.equals(Circle.class) && circleVisibility
-           || classType.equals(Square.class) && squareVisibility
-           || classType.equals(Spiral.class) && spiralVisibility
-           || classType.equals(IrregularPolygon.class) && polygonVisibility) 
-            
+                || classType.equals(Circle.class) && circleVisibility
+                || classType.equals(Square.class) && squareVisibility
+                || classType.equals(Spiral.class) && spiralVisibility
+                || classType.equals(IrregularPolygon.class) && polygonVisibility) {
             figure.drawFigure(this.getGraphics());
+        }
     }
 
+    /**
+     * Este método dibuja las figuras del Stack en su forma normal o invertida,
+     * dependiendo el estado de la bandera, primero se actualiza el panel,
+     * despues dibuja las figuras del Stack dependiendo si están visibles o no,
+     * agregando un metodo que hace esperar 200ms entre figura.
+     *
+     * @param isInvertedStack bandera booleana que nos indica si está invertido
+     * el Stack.
+     */
     public void drawFigures(boolean isInvertedStack) {
-        
+        //Actualizamos el panel
         this.revalidate();
         this.update(this.getGraphics());
 
@@ -135,6 +148,16 @@ public class TestGraphics extends JPanel {
         }
     }
 
+    /**
+     * Este método dibuja las figuras del Stack en su forma normal o invertida,
+     * dependiendo el estado de la bandera, primero se actualiza el panel,
+     * despues dibuja las figuras del Stack dependiendo si están visibles y si
+     * estan dentro de los limites de dibujos, agregando un metodo que hace
+     * esperar 200ms entre figura.
+     *
+     * @param isInvertedStack bandera booleana que nos indica si está invertido
+     * el Stack.
+     */
     public void drawinBounds(boolean isInvertedStack) {
 
         this.revalidate();
@@ -149,7 +172,6 @@ public class TestGraphics extends JPanel {
                     isFigureVisibleToDraw(figure);
                     waitAMoment(200);
                 }
-
                 invertedFigures.push(figure);
             }
             while (!invertedFigures.empty()) {
@@ -173,6 +195,7 @@ public class TestGraphics extends JPanel {
         }
     }
 
+    //Con este metodo hacemos que se espere x ms entre el dibujo de cada figura.
     private void waitAMoment(long ms) {
         try {
             TimeUnit.MILLISECONDS.sleep(ms);
@@ -181,7 +204,9 @@ public class TestGraphics extends JPanel {
         }
     }
 
-    public boolean figureonPeek() {
+    //Con metodo verificamos si el tope del Stack está fuera de los limities,
+    //llamando al metodo abstracto de la figura que verifica los limites.
+    public boolean isPeekOutOfBounds() {
         return figures.peek().isOutOfBounds((int) getPreferredSize().getWidth(), (int) getPreferredSize().getHeight());
     }
 }

@@ -28,6 +28,7 @@ public abstract class Figure {
         this.yPosition = yPosition;
         this.size = size;
         this.color = color;
+
     }
 
  
@@ -48,11 +49,14 @@ public abstract class Figure {
     public Color getColor() {
         return color;
     }
+
     
     /**
      * Este método abstracto se utilizará para dibujar las diferentes figuras
      */
     public abstract void drawFigure(Graphics g);
+    
+    public abstract boolean isOutOfBounds(int xLimit, int yLimit);
 
   
       

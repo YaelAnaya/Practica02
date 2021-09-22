@@ -4,10 +4,13 @@
  * and open the template in the editor.
  */
 package testgraphics;
+
 import java.awt.*;
+
 /**
- *Con esta clase buscamos modelar un circulo, para posteriormente
- * dibujarlo en nuestro Canvas.
+ * Con esta clase buscamos modelar un circulo, para posteriormente dibujarlo en
+ * nuestro Canvas.
+ *
  * @author yaelanaya
  */
 public class Circle extends Figure {
@@ -20,6 +23,14 @@ public class Circle extends Figure {
     public void drawFigure(Graphics g) {
         g.setColor(color);
         g.fillOval(xPosition, yPosition, size, size);
+    }
+
+    @Override
+    public boolean isOutOfBounds(int xLimit, int yLimit) {
+        int edgeX, edgeY;
+        edgeX = xPosition + size;
+        edgeY = yPosition + size;
+        return edgeX > xLimit || edgeY > yLimit;
     }
 
 }

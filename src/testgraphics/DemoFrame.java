@@ -6,8 +6,10 @@
 package testgraphics;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import javax.swing.JColorChooser;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -15,17 +17,19 @@ import javax.swing.JColorChooser;
  */
 public class DemoFrame extends javax.swing.JFrame {
 
-    private boolean isPolygonClicked;
-    private ArrayList<Integer> xPoints;
-    private ArrayList<Integer> yPoints;
-    private Color color;
-    private boolean isInverted;
-    
+    private boolean justInBounds;
+
     public DemoFrame() {
         initComponents();
-        isPolygonClicked = false;
-        xPoints = new ArrayList<>();
-        yPoints = new ArrayList<>();
+        justInBounds = false;
+    }
+
+    private void showIfIsOutOfBounds() {
+        if (panel.figureonPeek()) {
+            boundsTextField.setText("Excede Limite");
+        } else {
+            boundsTextField.setText("Dentro del Limite");
+        }
     }
 
     /**
@@ -38,30 +42,53 @@ public class DemoFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         panel = new testgraphics.TestGraphics();
-        panel1 = new testgraphics.TestGraphics();
+        jPanel1 = new javax.swing.JPanel();
+        boundsTextField = new javax.swing.JTextField();
         squareButton = new javax.swing.JButton();
-        circleButton = new javax.swing.JButton();
         triangleButton = new javax.swing.JButton();
+        circleButton = new javax.swing.JButton();
         spiralButton = new javax.swing.JButton();
         polygonButton = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        squareCheckBox = new javax.swing.JCheckBox();
+        circleCheckBox = new javax.swing.JCheckBox();
+        triangleCheckBox = new javax.swing.JCheckBox();
+        spiralCheckBox = new javax.swing.JCheckBox();
+        polygonCheckBox = new javax.swing.JCheckBox();
+        jPanel2 = new javax.swing.JPanel();
         drawButton = new javax.swing.JButton();
         invertedButton = new javax.swing.JButton();
-        ToggleButton = new javax.swing.JToggleButton();
+        boundsToggleButton = new javax.swing.JToggleButton();
         clearButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Demo");
+        setTitle("[Test Figures]");
         setBackground(new java.awt.Color(255, 255, 255));
         setBounds(new java.awt.Rectangle(0, 0, 300, 300));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setResizable(false);
+        setLocation(new java.awt.Point(480, 280));
 
-        panel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panel1MouseClicked(evt);
-            }
-        });
+        panel.setBackground(new java.awt.Color(255, 255, 255));
+        panel.setPreferredSize(new java.awt.Dimension(937, 533));
+
+        javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
+        panel.setLayout(panelLayout);
+        panelLayout.setHorizontalGroup(
+            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 937, Short.MAX_VALUE)
+        );
+        panelLayout.setVerticalGroup(
+            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 533, Short.MAX_VALUE)
+        );
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        boundsTextField.setEditable(false);
+        boundsTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        boundsTextField.setText("Sin figuras aún");
+        boundsTextField.setFocusable(false);
+        boundsTextField.setVerifyInputWhenFocusTarget(false);
+        jPanel1.add(boundsTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 120, -1));
 
         squareButton.setText("Cuadrado");
         squareButton.addActionListener(new java.awt.event.ActionListener() {
@@ -69,13 +96,7 @@ public class DemoFrame extends javax.swing.JFrame {
                 squareButtonActionPerformed(evt);
             }
         });
-
-        circleButton.setText("Círculo");
-        circleButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                circleButtonActionPerformed(evt);
-            }
-        });
+        jPanel1.add(squareButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 100, -1));
 
         triangleButton.setText("Tríangulo");
         triangleButton.addActionListener(new java.awt.event.ActionListener() {
@@ -83,6 +104,15 @@ public class DemoFrame extends javax.swing.JFrame {
                 triangleButtonActionPerformed(evt);
             }
         });
+        jPanel1.add(triangleButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 100, -1));
+
+        circleButton.setText("Círculo");
+        circleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                circleButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(circleButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 100, -1));
 
         spiralButton.setText("Espiral");
         spiralButton.addActionListener(new java.awt.event.ActionListener() {
@@ -90,6 +120,7 @@ public class DemoFrame extends javax.swing.JFrame {
                 spiralButtonActionPerformed(evt);
             }
         });
+        jPanel1.add(spiralButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 100, -1));
 
         polygonButton.setText("Poligono");
         polygonButton.addActionListener(new java.awt.event.ActionListener() {
@@ -97,65 +128,76 @@ public class DemoFrame extends javax.swing.JFrame {
                 polygonButtonActionPerformed(evt);
             }
         });
+        jPanel1.add(polygonButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 100, -1));
 
-        javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
-        panel1.setLayout(panel1Layout);
-        panel1Layout.setHorizontalGroup(
-            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                .addContainerGap(790, Short.MAX_VALUE)
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(triangleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(squareButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(circleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(spiralButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(polygonButton, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29))
-        );
-        panel1Layout.setVerticalGroup(
-            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel1Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(squareButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(circleButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(triangleButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(spiralButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(polygonButton)
-                .addContainerGap(266, Short.MAX_VALUE))
-        );
+        squareCheckBox.setSelected(true);
+        squareCheckBox.setText("Cuadrados");
+        squareCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                squareCheckBoxActionPerformed(evt);
+            }
+        });
+        jPanel1.add(squareCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
 
-        java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout();
-        flowLayout1.setAlignOnBaseline(true);
-        jPanel1.setLayout(flowLayout1);
+        circleCheckBox.setSelected(true);
+        circleCheckBox.setText("Círculos");
+        circleCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                circleCheckBoxActionPerformed(evt);
+            }
+        });
+        jPanel1.add(circleCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, -1, -1));
 
-        drawButton.setText("Dibujar");
+        triangleCheckBox.setSelected(true);
+        triangleCheckBox.setText("Tríangulos");
+        triangleCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                triangleCheckBoxActionPerformed(evt);
+            }
+        });
+        jPanel1.add(triangleCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, -1, -1));
+
+        spiralCheckBox.setSelected(true);
+        spiralCheckBox.setText("Espirales");
+        spiralCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                spiralCheckBoxActionPerformed(evt);
+            }
+        });
+        jPanel1.add(spiralCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, -1, -1));
+
+        polygonCheckBox.setSelected(true);
+        polygonCheckBox.setText("Poligonos");
+        polygonCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                polygonCheckBoxActionPerformed(evt);
+            }
+        });
+        jPanel1.add(polygonCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, -1, -1));
+
+        drawButton.setText("Dibujar Stack ");
         drawButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 drawButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(drawButton);
+        jPanel2.add(drawButton);
 
-        invertedButton.setText("Dibujar de manera inversa");
+        invertedButton.setText("Dibujar Stack Inverso");
         invertedButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 invertedButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(invertedButton);
+        jPanel2.add(invertedButton);
 
-        ToggleButton.setText("Solo figuras dentro de los limites");
-        ToggleButton.addActionListener(new java.awt.event.ActionListener() {
+        boundsToggleButton.setText("Dentro del Limite");
+        boundsToggleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ToggleButtonActionPerformed(evt);
+                boundsToggleButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(ToggleButton);
-        ToggleButton.getAccessibleContext().setAccessibleName("ToggleButton");
+        jPanel2.add(boundsToggleButton);
 
         clearButton.setText("Limpiar");
         clearButton.addActionListener(new java.awt.event.ActionListener() {
@@ -163,123 +205,147 @@ public class DemoFrame extends javax.swing.JFrame {
                 clearButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(clearButton);
+        jPanel2.add(clearButton);
 
-        javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
-        panel.setLayout(panelLayout);
-        panelLayout.setHorizontalGroup(
-            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 923, Short.MAX_VALUE)
-            .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(panelLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 923, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(0, 0, Short.MAX_VALUE)))
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
-        panelLayout.setVerticalGroup(
-            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 516, Short.MAX_VALUE)
-            .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(panelLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, 0)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
-
-        getContentPane().add(panel, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void panel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel1MouseClicked
-        // TODO add your handling code here:
-
-        if(isPolygonClicked){
-
-
-            if(evt.getClickCount() == 1){
-
-                xPoints.add(evt.getX());
-                yPoints.add(evt.getY());
-                if(xPoints.size() > 1)
-                panel.drawLines(xPoints.get(xPoints.size() - 2), yPoints.get(yPoints.size() - 2), xPoints.get(xPoints.size() - 1), yPoints.get(yPoints.size() - 1));
-
-            }
-            else if(evt.getClickCount() == 2){
-                color = JColorChooser.showDialog(this, "Seleccione el color de su figura", color.BLACK);
-                xPoints.add(xPoints.get(0));
-                yPoints.add(yPoints.get(0));
-                panel.addIrregularPolygon(xPoints, yPoints, color);
-                panel.drawFigures(isInverted);
-                xPoints.clear();
-                yPoints.clear();
-                isPolygonClicked = false;
-
-            }
-        }
-
-    }//GEN-LAST:event_panel1MouseClicked
-
-    private void ToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ToggleButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ToggleButtonActionPerformed
-
     private void invertedButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invertedButtonActionPerformed
         // TODO add your handling code here:
+        if (justInBounds)
+            panel.drawinBounds(true);
 
-        isInverted = false;
-        panel.drawFigures(isInverted);
-        
+        else
+            panel.drawFigures(true);
     }//GEN-LAST:event_invertedButtonActionPerformed
-
-    private void polygonButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_polygonButtonActionPerformed
-        // TODO add your handling code here:
-        isPolygonClicked = true;
-    }//GEN-LAST:event_polygonButtonActionPerformed
-
-    private void spiralButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_spiralButtonActionPerformed
-        // TODO add your handling code here:
-        DataJDialog data = new DataJDialog(this, true, true);
-        data.setVisible(true);
-        panel.addSpiral(data.getxPositionTextField(), data.getyPositionTextField(), data.getSizeTextField(), data.getIncrementTextField(), data.getRadiumTextField(),  data.getColor());
-    }//GEN-LAST:event_spiralButtonActionPerformed
-
-    private void triangleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_triangleButtonActionPerformed
-        // TODO add your handling code here:
-        DataJDialog data = new DataJDialog(this, true, false);
-        data.setVisible(true);
-        panel.addTriangle(data.getxPositionTextField(), data.getyPositionTextField(), data.getSizeTextField(), data.getColor());
-    }//GEN-LAST:event_triangleButtonActionPerformed
-
-    private void circleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_circleButtonActionPerformed
-        // TODO add your handling code here:
-        DataJDialog data = new DataJDialog(this, true, false);
-        data.setVisible(true);
-        panel.addCircle(data.getxPositionTextField(), data.getyPositionTextField(), data.getSizeTextField(), data.getColor());
-    }//GEN-LAST:event_circleButtonActionPerformed
-
-    private void squareButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_squareButtonActionPerformed
-        // TODO add your handling code here:
-        DataJDialog data = new DataJDialog(this, true, false);
-        data.setVisible(true);
-        panel.addSquare(data.getxPositionTextField(), data.getyPositionTextField(), data.getSizeTextField(), data.getColor());
-    }//GEN-LAST:event_squareButtonActionPerformed
 
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
         // TODO add your handling code here:
         panel.clear();
         repaint();
+        boundsTextField.setText("Sin figuras aún");
     }//GEN-LAST:event_clearButtonActionPerformed
 
     private void drawButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drawButtonActionPerformed
         // TODO add your handling code here:
-        isInverted = true;
-        panel.drawFigures(isInverted);
+        if (justInBounds) 
+            panel.drawinBounds(false);
+        else 
+            panel.drawFigures(false);
+        
+
+
     }//GEN-LAST:event_drawButtonActionPerformed
+
+    private void polygonButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_polygonButtonActionPerformed
+        // TODO add your handling code here:
+        PolygonDialog polygon = new PolygonDialog(this, true);
+        polygon.setVisible(true);
+        panel.addIrregularPolygon(polygon.getxPoints(), polygon.getyPoints(), polygon.getPointCounter(), polygon.getColor());
+        showIfIsOutOfBounds();
+
+    }//GEN-LAST:event_polygonButtonActionPerformed
+
+    private void spiralButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_spiralButtonActionPerformed
+        // TODO add your handling code here:
+        DataDialog data = new DataDialog(this, true, true);
+        data.setVisible(true);
+        panel.addSpiral(data.getxPositionTextField(), data.getyPositionTextField(), data.getSizeTextField(), data.getIncrementTextField(), data.getRadiumTextField(), data.getColor());
+        showIfIsOutOfBounds();
+    }//GEN-LAST:event_spiralButtonActionPerformed
+
+    private void triangleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_triangleButtonActionPerformed
+        // TODO add your handling code here:
+        DataDialog data = new DataDialog(this, true, false);
+        data.setVisible(true);
+        panel.addTriangle(data.getxPositionTextField(), data.getyPositionTextField(), data.getSizeTextField(), data.getColor());
+        showIfIsOutOfBounds();
+
+    }//GEN-LAST:event_triangleButtonActionPerformed
+
+    private void circleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_circleButtonActionPerformed
+        // TODO add your handling code here:
+        DataDialog data = new DataDialog(this, true, false);
+        data.setVisible(true);
+        panel.addCircle(data.getxPositionTextField(), data.getyPositionTextField(), data.getSizeTextField(), data.getColor());
+        showIfIsOutOfBounds();
+    }//GEN-LAST:event_circleButtonActionPerformed
+
+    private void squareButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_squareButtonActionPerformed
+        // TODO add your handling code here:
+        DataDialog data = new DataDialog(this, true, false);
+        data.setVisible(true);
+        panel.addSquare(data.getxPositionTextField(), data.getyPositionTextField(), data.getSizeTextField(), data.getColor());
+        showIfIsOutOfBounds();
+    }//GEN-LAST:event_squareButtonActionPerformed
+
+    private void boundsToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boundsToggleButtonActionPerformed
+        // TODO add your handling code here:
+        if (boundsToggleButton.isSelected()) {
+            panel.drawinBounds(false);
+            justInBounds = true;
+        } else {
+            justInBounds = false;
+            panel.drawFigures(false);
+        }
+
+    }//GEN-LAST:event_boundsToggleButtonActionPerformed
+
+    private void squareCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_squareCheckBoxActionPerformed
+        // TODO add your handling code here:
+        panel.setSquareVisibility(squareCheckBox.isSelected());
+        panel.drawFigures(false);
+    }//GEN-LAST:event_squareCheckBoxActionPerformed
+
+    private void circleCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_circleCheckBoxActionPerformed
+        // TODO add your handling code here:
+        panel.setCircleVisibility(circleCheckBox.isSelected());
+        panel.drawFigures(false);
+    }//GEN-LAST:event_circleCheckBoxActionPerformed
+
+    private void triangleCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_triangleCheckBoxActionPerformed
+        // TODO add your handling code here:
+        panel.setTriangleVisibility(triangleCheckBox.isSelected());
+        panel.drawFigures(false);
+    }//GEN-LAST:event_triangleCheckBoxActionPerformed
+
+    private void spiralCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_spiralCheckBoxActionPerformed
+        // TODO add your handling code here:
+        panel.setSpiralVisibility(spiralCheckBox.isSelected());
+        panel.drawFigures(false);
+    }//GEN-LAST:event_spiralCheckBoxActionPerformed
+
+    private void polygonCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_polygonCheckBoxActionPerformed
+        // TODO add your handling code here:
+        panel.setPolygonVisibility(polygonCheckBox.isSelected());
+        panel.drawFigures(false);
+    }//GEN-LAST:event_polygonCheckBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -317,17 +383,23 @@ public class DemoFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JToggleButton ToggleButton;
+    private javax.swing.JTextField boundsTextField;
+    private javax.swing.JToggleButton boundsToggleButton;
     private javax.swing.JButton circleButton;
+    private javax.swing.JCheckBox circleCheckBox;
     private javax.swing.JButton clearButton;
     private javax.swing.JButton drawButton;
     private javax.swing.JButton invertedButton;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private testgraphics.TestGraphics panel;
-    private testgraphics.TestGraphics panel1;
     private javax.swing.JButton polygonButton;
+    private javax.swing.JCheckBox polygonCheckBox;
     private javax.swing.JButton spiralButton;
+    private javax.swing.JCheckBox spiralCheckBox;
     private javax.swing.JButton squareButton;
+    private javax.swing.JCheckBox squareCheckBox;
     private javax.swing.JButton triangleButton;
+    private javax.swing.JCheckBox triangleCheckBox;
     // End of variables declaration//GEN-END:variables
 }

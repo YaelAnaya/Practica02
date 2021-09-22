@@ -23,8 +23,8 @@ public class IrregularPolygon extends Figure {
     /**
      * Este constructor es utilizado para crear al Poligono.
      */
-    public IrregularPolygon(ArrayList<Integer> xPoints, ArrayList<Integer> yPoints, Color color) {
-        super(0, 0, 0, color);
+    public IrregularPolygon(ArrayList<Integer> xPoints, ArrayList<Integer> yPoints, int size, Color color) {
+        super(1, 1, size, color);
         this.xPoints = xPoints;
         this.yPoints = yPoints;
 
@@ -40,8 +40,8 @@ public class IrregularPolygon extends Figure {
     }
 
     public int[] convertToArray(ArrayList<Integer> list) {
-        int[] arrayAuxiliar = new int[list.size()];
-        for (int i = 0; i < list.size(); i++) {
+        int[] arrayAuxiliar = new int[size];
+        for (int i = 0; i < size; i++) {
             arrayAuxiliar[i] = list.get(i);
         }
         return arrayAuxiliar;
@@ -49,17 +49,21 @@ public class IrregularPolygon extends Figure {
 
     @Override
     public void drawFigure(Graphics g) {
-        g.setColor(color);
         int[] arrayXPoints = convertToArray(xPoints);
         int[] arrayYPoints = convertToArray(yPoints);
         
-        for (int i = 0; i < xPoints.size() - 1; i++) {
-            g.drawLine(xPoints.get(i), yPoints.get(i), xPoints.get(i + 1), yPoints.get(i + 1));
+        g.setColor(color);
+        g.fillPolygon(arrayXPoints, arrayYPoints, size);
+    }
+
+    @Override
+    public boolean isOutOfBounds(int xLimit, int yLimit) {
+        for (int i = 0; i < size; i++) {
+            if (xPoints.get(i) > xLimit || yPoints.get(i) > yLimit) {
+                return true;
+            }
         }
-
-        g.fillPolygon(arrayXPoints, arrayYPoints, xPoints.size());
-        
-
+        return false;
     }
 
 }

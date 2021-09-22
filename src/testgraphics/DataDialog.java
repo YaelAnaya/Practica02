@@ -12,17 +12,18 @@ import javax.swing.*;
  *
  * @author yaelanaya
  */
-public class DataJDialog extends javax.swing.JDialog {
+public class DataDialog extends javax.swing.JDialog {
 
     private Color color;
     
-    public DataJDialog(java.awt.Frame parent, boolean modal, boolean isSpiralSelected) {
+    public DataDialog(java.awt.Frame parent, boolean modal, boolean isSpiralSelected) {
         super(parent, modal);
         initComponents();
+        
         isSpiral(isSpiralSelected);
     }
 
-    private DataJDialog(JFrame jFrame, boolean b) {
+    private DataDialog(JFrame jFrame, boolean b) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -69,8 +70,8 @@ public class DataJDialog extends javax.swing.JDialog {
     }
 
     private void isSpiral(boolean isSpiralSelected) {
-        if (!isSpiralSelected) {
-            setBounds(new Rectangle(800, 300, 250, 190));
+        if (isSpiralSelected) {
+            setBounds(new Rectangle(1120, 450, 215, 260));
         }
 
         incrementLabel.setVisible(isSpiralSelected);
@@ -95,6 +96,10 @@ public class DataJDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        agreeButton = new javax.swing.JButton();
+        ColorButton = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
         xPositionLabel = new javax.swing.JLabel();
         xPositionTextField = new javax.swing.JTextField();
         yPositionLabel = new javax.swing.JLabel();
@@ -105,19 +110,40 @@ public class DataJDialog extends javax.swing.JDialog {
         radiumTextField = new javax.swing.JTextField();
         incrementLabel = new javax.swing.JLabel();
         incrementTextField = new javax.swing.JTextField();
-        agreeButton = new javax.swing.JButton();
-        ColorButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBounds(new Rectangle(800, 300, 250, 260));
-        setLocation(new java.awt.Point(800, 300));
-        setMinimumSize(new java.awt.Dimension(250, 120));
+        setLocation(new java.awt.Point(1120, 450));
+        setMinimumSize(new java.awt.Dimension(220, 135));
         setName("Datos de la Figura"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(240, 260));
-        setSize(new java.awt.Dimension(250, 260));
+        setPreferredSize(new java.awt.Dimension(220, 195));
+        setResizable(false);
+        setSize(new java.awt.Dimension(250, 20));
+
+        agreeButton.setText("Aceptar");
+        agreeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agreeButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(agreeButton);
+
+        ColorButton.setText("Color");
+        ColorButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ColorButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(ColorButton);
+
+        jPanel2.setAlignmentY(0.4F);
+        java.awt.FlowLayout flowLayout2 = new java.awt.FlowLayout(java.awt.FlowLayout.TRAILING, 6, 6);
+        flowLayout2.setAlignOnBaseline(true);
+        jPanel2.setLayout(flowLayout2);
 
         xPositionLabel.setText("Posición en [X]:");
         xPositionLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jPanel2.add(xPositionLabel);
 
         xPositionTextField.setMinimumSize(new java.awt.Dimension(86, 21));
         xPositionTextField.setPreferredSize(new java.awt.Dimension(86, 26));
@@ -126,15 +152,19 @@ public class DataJDialog extends javax.swing.JDialog {
                 xPositionTextFieldActionPerformed(evt);
             }
         });
+        jPanel2.add(xPositionTextField);
 
         yPositionLabel.setText("Posición en [Y]:");
         yPositionLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jPanel2.add(yPositionLabel);
 
         yPositionTextField.setMinimumSize(new java.awt.Dimension(86, 21));
         yPositionTextField.setPreferredSize(new java.awt.Dimension(86, 26));
+        jPanel2.add(yPositionTextField);
 
         sizeLabel.setText("Tamaño:");
         sizeLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jPanel2.add(sizeLabel);
 
         sizeTextField.setMinimumSize(new java.awt.Dimension(86, 21));
         sizeTextField.setPreferredSize(new java.awt.Dimension(86, 26));
@@ -143,96 +173,42 @@ public class DataJDialog extends javax.swing.JDialog {
                 sizeTextFieldActionPerformed(evt);
             }
         });
+        jPanel2.add(sizeTextField);
 
         radiumLabel.setText("Radio inical:");
         radiumLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jPanel2.add(radiumLabel);
 
         radiumTextField.setMinimumSize(new java.awt.Dimension(86, 26));
         radiumTextField.setPreferredSize(new java.awt.Dimension(86, 26));
+        jPanel2.add(radiumTextField);
 
         incrementLabel.setText("Incremento:");
         incrementLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jPanel2.add(incrementLabel);
 
         incrementTextField.setMinimumSize(new java.awt.Dimension(86, 21));
         incrementTextField.setPreferredSize(new java.awt.Dimension(86, 26));
-
-        agreeButton.setText("Aceptar");
-        agreeButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                agreeButtonActionPerformed(evt);
-            }
-        });
-
-        ColorButton.setText("Color");
-        ColorButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ColorButtonActionPerformed(evt);
-            }
-        });
+        jPanel2.add(incrementTextField);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(radiumLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-                            .addComponent(sizeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(incrementLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(agreeButton))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(radiumTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(sizeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(incrementTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ColorButton))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(yPositionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-                            .addComponent(xPositionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(12, 12, 12)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(xPositionTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(yPositionTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(xPositionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(xPositionLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(yPositionLabel)
-                    .addComponent(yPositionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(sizeLabel)
-                    .addComponent(sizeTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(radiumLabel)
-                    .addComponent(radiumTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(incrementTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(incrementLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(agreeButton)
-                    .addComponent(ColorButton))
-                .addGap(11, 11, 11))
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14))
         );
 
         pack();
@@ -273,14 +249,18 @@ public class DataJDialog extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DataJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DataDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DataJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DataDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DataJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DataDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DataJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DataDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -290,8 +270,8 @@ public class DataJDialog extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                DataJDialog dialog;
-                dialog = new DataJDialog(new javax.swing.JFrame(), false);
+                DataDialog dialog;
+                dialog = new DataDialog(new javax.swing.JFrame(), false);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -308,6 +288,8 @@ public class DataJDialog extends javax.swing.JDialog {
     private javax.swing.JButton agreeButton;
     private javax.swing.JLabel incrementLabel;
     private javax.swing.JTextField incrementTextField;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel radiumLabel;
     private javax.swing.JTextField radiumTextField;
     private javax.swing.JLabel sizeLabel;

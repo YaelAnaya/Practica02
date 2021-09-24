@@ -13,6 +13,7 @@ import javax.swing.*;
  * * @author yaelanaya
  */
 public class DemoFrame extends javax.swing.JFrame {
+
     //Bandera que nos indica si solo se motraran las figuras dentro del limite.
     private boolean justInBounds;
 
@@ -20,7 +21,7 @@ public class DemoFrame extends javax.swing.JFrame {
         initComponents();
         justInBounds = false;
     }
-    
+
     //Con este método se verifica si la figura en el tope está o no dentro del límite,
     //mostrando el estado en un TextField.
     private void showIfIsOutOfBounds() {
@@ -271,7 +272,7 @@ public class DemoFrame extends javax.swing.JFrame {
     private void polygonButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_polygonButtonActionPerformed
         PolygonDialog polygon = new PolygonDialog(this, true);
         polygon.setVisible(true);
-        panel.addIrregularPolygon(polygon.getxPoints(), polygon.getyPoints(), polygon.getPointCounter(), polygon.getColor());
+        panel.addIrregularPolygon(new IrregularPolygon(polygon.getxPoints(), polygon.getyPoints(), polygon.getPointCounter(), polygon.getColor()));
         showIfIsOutOfBounds();
 
     }//GEN-LAST:event_polygonButtonActionPerformed
@@ -279,14 +280,18 @@ public class DemoFrame extends javax.swing.JFrame {
     private void spiralButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_spiralButtonActionPerformed
         DataDialog data = new DataDialog(this, true, true);
         data.setVisible(true);
-        panel.addSpiral(data.getxPositionTextField(), data.getyPositionTextField(), data.getSizeTextField(), data.getIncrementTextField(), data.getRadiumTextField(), data.getColor());
+        if (data.getXPosition() > 0 && data.getYPosition() > 0 && data.getFigureSize() > 0) {
+            panel.addSpiral(new Spiral(data.getXPosition(), data.getYPosition(), data.getFigureSize(), data.getFigureIncrement(), data.getFigureRadium(), data.getColor()));
+        }
         showIfIsOutOfBounds();
     }//GEN-LAST:event_spiralButtonActionPerformed
 
     private void triangleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_triangleButtonActionPerformed
         DataDialog data = new DataDialog(this, true, false);
         data.setVisible(true);
-        panel.addTriangle(data.getxPositionTextField(), data.getyPositionTextField(), data.getSizeTextField(), data.getColor());
+        if (data.getXPosition() > 0 && data.getYPosition() > 0 && data.getFigureSize() > 0) {
+            panel.addTriangle(new Triangle(data.getXPosition(), data.getYPosition(), data.getFigureSize(), data.getColor()));
+        }
         showIfIsOutOfBounds();
 
     }//GEN-LAST:event_triangleButtonActionPerformed
@@ -294,7 +299,9 @@ public class DemoFrame extends javax.swing.JFrame {
     private void circleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_circleButtonActionPerformed
         DataDialog data = new DataDialog(this, true, false);
         data.setVisible(true);
-        panel.addCircle(data.getxPositionTextField(), data.getyPositionTextField(), data.getSizeTextField(), data.getColor());
+        if (data.getXPosition() > 0 && data.getYPosition() > 0 && data.getFigureSize() > 0) {
+            panel.addCircle(new Circle(data.getXPosition(), data.getYPosition(), data.getFigureSize(), data.getColor()));
+        }
         showIfIsOutOfBounds();
     }//GEN-LAST:event_circleButtonActionPerformed
 
@@ -302,7 +309,9 @@ public class DemoFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         DataDialog data = new DataDialog(this, true, false);
         data.setVisible(true);
-        panel.addSquare(data.getxPositionTextField(), data.getyPositionTextField(), data.getSizeTextField(), data.getColor());
+        if (data.getXPosition() > 0 && data.getYPosition() > 0 && data.getFigureSize() > 0) {
+            panel.addSquare(new Square(data.getXPosition(), data.getYPosition(), data.getFigureSize(), data.getColor()));
+        }
         showIfIsOutOfBounds();
     }//GEN-LAST:event_squareButtonActionPerformed
 

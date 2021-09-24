@@ -31,32 +31,24 @@ public class TestGraphics extends JPanel {
      * Con estos metodos lo que hacemos es agregas las figuras al Stack de
      * Figuras, siempre y cuando los valores introducidos sean mayores a 0.
      */
-    public void addTriangle(int xPosition, int yPosition, int size, Color color) {
-        if (xPosition > 0 && yPosition > 0 && size > 0) {
-            figures.push(new Triangle(xPosition, yPosition, size, color));
-        }
+    public void addTriangle(Triangle triangle) {
+            figures.push(triangle);
     }
 
-    public void addCircle(int xPosition, int yPosition, int size, Color color) {
-        if (xPosition > 0 && yPosition > 0 && size > 0) {
-            figures.push(new Circle(xPosition, yPosition, size, color));
-        }
+    public void addCircle(Circle circle) {
+            figures.push(circle);
     }
 
-    public void addSquare(int xPosition, int yPosition, int size, Color color) {
-        if (xPosition > 0 && yPosition > 0 && size > 0) {
-            figures.push(new Square(xPosition, yPosition, size, color));
-        }
+    public void addSquare(Square square) {
+        figures.push(square);
     }
 
-    public void addSpiral(int xPosition, int yPosition, int size, int increment, int initialRadium, Color color) {
-        if (xPosition > 0 && yPosition > 0 && size > 0 && increment > 0 && initialRadium > 0) {
-            figures.push(new Spiral(xPosition, yPosition, size, increment, initialRadium, color));
-        }
+    public void addSpiral(Spiral spiral) {
+        figures.push(spiral);
     }
 
-    public void addIrregularPolygon(ArrayList<Integer> xPosition, ArrayList<Integer> yPosition, int size, Color color) {
-        figures.push(new IrregularPolygon(xPosition, yPosition, size, color));
+    public void addIrregularPolygon(IrregularPolygon polygon) {
+        figures.push(polygon);
     }
 
     /**

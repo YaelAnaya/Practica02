@@ -26,9 +26,9 @@ public class IrregularPolygon extends Figure {
 
     /**
      * Con este método lo que se hace es convertir el ArrayList de Integers a
-     * Arrays de tipo primitivo int.
+     * Arrays de tipo primitivo int, para poder dibujar el polígono.
      *
-     * @param list La lista que convertieramos a Array de tipo primitivo.
+     * @param list La lista que convertiremos a Array de tipo primitivo.
      * @return El Array de tipo primitivo.
      */
     public int[] convertToArray(ArrayList<Integer> list) {

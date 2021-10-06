@@ -24,8 +24,8 @@ public class Triangle extends Figure {
         getYPointsTriangle();
     }
 
-    //Con este metodo calculamos los puntos de X, para poder dibujar el
-    //Triangulo equilatero.
+    //Con este método calculamos los puntos de X, para poder dibujar el
+    //Triángulo equilátero.
     public void getXPointsTriangle() {
         //Guardamos el punto incial X.
         xPoints[0] = xPosition;
@@ -35,8 +35,8 @@ public class Triangle extends Figure {
         xPoints[2] = xPosition - (size / 2);
     }
 
-    //Con este metodo calculamos los puntos de Y, para poder dibujar el
-    //Triangulo equilatero.
+    //Con este método calculamos los puntos de Y, para poder dibujar el
+    //Triángulo equilátero.
     public void getYPointsTriangle() {
         //Guardamos el punto incial Y.
         yPoints[0] = yPosition;

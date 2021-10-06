@@ -237,7 +237,7 @@ public class DemoFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     //Con este método dibujamos los elementos del Stack en sentido inverso,
-    //también verifica si se aceptan figuras fuera de los limites.
+    //también verifica si se aceptan figuras fuera de los límites.
     private void invertedButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invertedButtonActionPerformed
         if (justInBounds)
             panel.drawinBounds(true);
@@ -253,8 +253,8 @@ public class DemoFrame extends javax.swing.JFrame {
         boundsTextField.setText("Sin figuras aún");
     }//GEN-LAST:event_clearButtonActionPerformed
 
-    //Con este método dibujamos los elementos del Stack,
-    //también verifica si se aceptan figuras fuera de los limites.
+    //Con este método dibujamos los elementos del Stack en su forma normal,
+    //también verifica si se aceptan figuras fuera de los límites.
     private void drawButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drawButtonActionPerformed
         if (justInBounds)
             panel.drawinBounds(false);
@@ -262,13 +262,12 @@ public class DemoFrame extends javax.swing.JFrame {
             panel.drawFigures(false);
     }//GEN-LAST:event_drawButtonActionPerformed
 
-    /**
-     * En estos eventos, se despliegan las ventanas de dialogo con las que
-     * obtenemos los datos propocionados por el usario, y con ellos creamos y
+     /**
+     * En estos eventos, se despliegan las ventanas de diálogo con las que
+     * obtenemos los datos proporcionados por el usuario, y con ellos creamos y
      * guardamos las figuras correspondientes, también verificamos si están
-     * fuera de los limites.
+     * fuera de los límites.
      */
-
     private void polygonButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_polygonButtonActionPerformed
         PolygonDialog polygon = new PolygonDialog(this, true);
         polygon.setVisible(true);
@@ -316,11 +315,9 @@ public class DemoFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_squareButtonActionPerformed
 
     /**
-     * Con este boton lo que hacemos es verificar si está clickeado el
-     * ToogleBotton o no, si lo está solo dibuja figuras dentro de los limites y
-     * cambia la bandera, para que solo se puedan dibujar figuras en los
-     * limites, al soltar el boton se cambia la bandera a falso y ya se puede
-     * dibujar fuera de los limites.
+     * Si está clickeado el ToggleButton, solo dibuja figuras dentro de los límites y cambia 
+     * la bandera, para que solo se puedan dibujar figuras en los límites, al soltar el botón 
+     * se cambia el estado de la bandera a falso y ya se puede dibujar fuera de los límites.
      */
     private void boundsToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boundsToggleButtonActionPerformed
         // TODO add your handling code here:
@@ -334,10 +331,10 @@ public class DemoFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_boundsToggleButtonActionPerformed
 
-    /**
-     * Con estas cajas lo que hacemos darle visibilidad a las figuras para poder
-     * dibujarlas, tambien se verifica si solo se pueden dibujar fuera de los
-     * limites.
+     /**
+     * Con estas cajas se indica la visibilidad de las figuras, para poder
+     * dibujarlas, también se verifica si solo se pueden dibujar fuera de los
+     * límites.
      */
 
     private void squareCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_squareCheckBoxActionPerformed

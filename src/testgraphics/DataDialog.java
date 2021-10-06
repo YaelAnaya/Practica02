@@ -9,7 +9,6 @@ import java.awt.*;
 import javax.swing.*;
 
 /**
- *
  * @author yaelanaya
  */
 public class DataDialog extends javax.swing.JDialog {
@@ -21,19 +20,20 @@ public class DataDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         isSpiralSelected = spiralState;
-         //Con este método sabremos si se clikeo la espiral.
+        //Con este método sabremos si se clikeo la espiral.
         isSpiral(spiralState);
     }
 
-    /**Con los métodos getters retornamos los valores introducidos por el usuario y obtenidos
-     * de los TextFields, que posteriormente fueron convertidos a entero.
+    /**
+     * Con los métodos Getters retornamos los valores introducidos por el usuario
+     * , estos valores se convierten a enteros mediante el método convertToInteger.
      */
     public int getFigureIncrement() {
         return convertTextToInteger(incrementTextField);
     }
 
     public int getFigureRadium() {
-        return convertTextToInteger(radiumTextField);
+        return convertTextToInteger(radiusTextField);
     }
 
     public int getFigureSize() {
@@ -56,21 +56,23 @@ public class DataDialog extends javax.swing.JDialog {
     
     /**
      * Con este método cambiamos el tamaño de la ventana de diálogo cada que se pique el 
-     * boton de la espiral, también mostraremos los campos para llenar de la Espiral.*/
+     * botón de la espiral, también mostraremos los campos para llenar de la Espiral.
+     */
     private void isSpiral(boolean isSpiralSelected) {
         if (isSpiralSelected) {
             setBounds(new Rectangle(1120, 450, 215, 260));   
             incrementLabel.setVisible(isSpiralSelected);
             incrementTextField.setVisible(isSpiralSelected);
-            radiumLabel.setVisible(isSpiralSelected);
-            radiumTextField.setVisible(isSpiralSelected);
+            radiusLabel.setVisible(isSpiralSelected);
+            radiusTextField.setVisible(isSpiralSelected);
         }
     }
     /**
-     * Este método valida que no se ingresó un espacio en blanco o caracteres que no sean numericos.
-     * Si no hay un espacio en blanco y se ingresó un numero, se convertirá el String a int y retornará
-     * el resultado de la conversión, en caso contrario, el método retorna un 0.
-     * @param text Objeto JTextField del cual convertiremos el String a Int
+     * Este método valida que no se ingresó un espacio en blanco o caracteres que no sean
+     * numéricos; si no hay un espacio en blanco y se ingresó un número, se convertirá el
+     * String a entero y retornará el resultado de la conversión, en caso contrario, el método
+     * retorna un 0.
+     * @param text Objeto JTextField del que obtenemos el String.
      */
     private int convertTextToInteger(JTextField text){
         if (!text.getText().isBlank() && text.getText().chars().allMatch(Character::isDigit) && !text.getText().startsWith("-")) {
@@ -99,8 +101,8 @@ public class DataDialog extends javax.swing.JDialog {
         yPositionTextField = new javax.swing.JTextField();
         sizeLabel = new javax.swing.JLabel();
         sizeTextField = new javax.swing.JTextField();
-        radiumLabel = new javax.swing.JLabel();
-        radiumTextField = new javax.swing.JTextField();
+        radiusLabel = new javax.swing.JLabel();
+        radiusTextField = new javax.swing.JTextField();
         incrementLabel = new javax.swing.JLabel();
         incrementTextField = new javax.swing.JTextField();
 
@@ -109,7 +111,6 @@ public class DataDialog extends javax.swing.JDialog {
         setLocation(new java.awt.Point(1120, 450));
         setMinimumSize(new java.awt.Dimension(220, 135));
         setName("Datos de la Figura"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(220, 195));
         setResizable(false);
         setSize(new java.awt.Dimension(250, 20));
 
@@ -158,13 +159,13 @@ public class DataDialog extends javax.swing.JDialog {
         sizeTextField.setPreferredSize(new java.awt.Dimension(86, 26));
         jPanel2.add(sizeTextField);
 
-        radiumLabel.setText("Radio inical:");
-        radiumLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jPanel2.add(radiumLabel);
+        radiusLabel.setText("Radio inical:");
+        radiusLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jPanel2.add(radiusLabel);
 
-        radiumTextField.setMinimumSize(new java.awt.Dimension(86, 26));
-        radiumTextField.setPreferredSize(new java.awt.Dimension(86, 26));
-        jPanel2.add(radiumTextField);
+        radiusTextField.setMinimumSize(new java.awt.Dimension(86, 26));
+        radiusTextField.setPreferredSize(new java.awt.Dimension(86, 26));
+        jPanel2.add(radiusTextField);
 
         incrementLabel.setText("Incremento:");
         incrementLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
@@ -196,11 +197,12 @@ public class DataDialog extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    //Cada que se pique el botón, se despliega el color choosher.
     private void ColorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ColorButtonActionPerformed
         color = JColorChooser.showDialog(this, "Seleccione el color de su figura", color.BLACK);
     }//GEN-LAST:event_ColorButtonActionPerformed
-
+    
+    //Cuando se usa el botón de aceptar, se cierra la ventana.
     private void agreeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agreeButtonActionPerformed
         this.dispose();
     }//GEN-LAST:event_agreeButtonActionPerformed
@@ -263,8 +265,8 @@ public class DataDialog extends javax.swing.JDialog {
     private javax.swing.JTextField incrementTextField;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel radiumLabel;
-    private javax.swing.JTextField radiumTextField;
+    private javax.swing.JLabel radiusLabel;
+    private javax.swing.JTextField radiusTextField;
     private javax.swing.JLabel sizeLabel;
     private javax.swing.JTextField sizeTextField;
     private javax.swing.JLabel xPositionLabel;

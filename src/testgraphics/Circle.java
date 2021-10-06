@@ -12,8 +12,8 @@ import java.awt.*;
  */
 public class Circle extends Figure {
 
-    public Circle(int xPosition, int yPosition, int diameter, Color color) {
-        super(xPosition, yPosition, diameter, color);
+    public Circle(int xPosition, int yPosition, int radius, Color color) {
+        super(xPosition, yPosition, radius, color);
     }
 
     // Sobreescribimos los métodos para poder dibujar las figuras y

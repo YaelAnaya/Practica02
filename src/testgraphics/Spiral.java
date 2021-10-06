@@ -12,13 +12,13 @@ import java.awt.*;
  */
 public class Spiral extends Figure {
 
-    private int increment;
-    private int initialRadium;
+    private final int INCREMENT;
+    private int initialRadius;
 
-    public Spiral(int xPosition, int yPosition, int size, int increment, int initialRadium, Color color) {
+    public Spiral(int xPosition, int yPosition, int size, int increment, int initialRadius, Color color) {
         super(xPosition, yPosition, size, color);
-        this.increment = increment;
-        this.initialRadium = initialRadium;
+        this.INCREMENT = increment;
+        this.initialRadius = initialRadius;
     }
 
     // Sobreescribimos los métodos para poder dibujar las figuras y
@@ -26,24 +26,24 @@ public class Spiral extends Figure {
     @Override
     public void drawFigure(Graphics g) {
         g.setColor(color);
-        initialRadium = 0;
+        initialRadius = 0;
         for (int i = 0; i < size; i++) {
-            g.drawArc(xPosition - initialRadium, yPosition - initialRadium, 2 * initialRadium, 2 * initialRadium, 0, 180);
-            initialRadium += increment;
-            g.drawArc(xPosition - initialRadium, yPosition - initialRadium, 2 * initialRadium - increment, 2 * initialRadium, 180, 180);
+            g.drawArc(xPosition - initialRadius, yPosition - initialRadius, 2 * initialRadius, 2 * initialRadius, 0, 180);
+            initialRadius += INCREMENT;
+            g.drawArc(xPosition - initialRadius, yPosition - initialRadius, 2 * initialRadius - INCREMENT, 2 * initialRadius, 180, 180);
         }
     }
 
     @Override
     public boolean isOutOfBounds(int xLimit, int yLimit) {
-        int totalRadium, edgeX, edgeX2, edgeY, edgeY2;
+        int totalRadius, edgeX, edgeX2, edgeY, edgeY2;
 
-        totalRadium = initialRadium + (size * increment) - increment;
+        totalRadius = initialRadius + (size * INCREMENT) - INCREMENT;
 
-        edgeX = xPosition + totalRadium;
-        edgeX2 = xPosition - totalRadium;
-        edgeY = yPosition + totalRadium + increment;
-        edgeY2 = yPosition - totalRadium + increment;
+        edgeX = xPosition + totalRadius;
+        edgeX2 = xPosition - totalRadius;
+        edgeY = yPosition + totalRadius + INCREMENT;
+        edgeY2 = yPosition - totalRadius + INCREMENT;
 
         return edgeX > xLimit || edgeX2 < 0 || edgeY > yLimit || edgeY2 < 0;
 

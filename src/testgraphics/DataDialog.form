@@ -13,9 +13,6 @@
       <Dimension value="[220, 135]"/>
     </Property>
     <Property name="name" type="java.lang.String" value="Datos de la Figura" noResource="true"/>
-    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[220, 195]"/>
-    </Property>
     <Property name="resizable" type="boolean" value="false"/>
     <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[250, 20]"/>
@@ -136,13 +133,13 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="radiumLabel">
+        <Component class="javax.swing.JLabel" name="radiusLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Radio inical:"/>
             <Property name="horizontalTextPosition" type="int" value="2"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="radiumTextField">
+        <Component class="javax.swing.JTextField" name="radiusTextField">
           <Properties>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[86, 26]"/>
@@ -336,11 +333,11 @@
             <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
           </StatementProvider>
           <Parameters>
-            <CodeExpression id="13_radiumLabel">
-              <CodeVariable name="radiumLabel" type="8194" declaredType="javax.swing.JLabel"/>
+            <CodeExpression id="13_radiusLabel">
+              <CodeVariable name="radiusLabel" type="8194" declaredType="javax.swing.JLabel"/>
               <ExpressionOrigin>
                 <ExpressionProvider type="ComponentRef">
-                  <ComponentRef name="radiumLabel"/>
+                  <ComponentRef name="radiusLabel"/>
                 </ExpressionProvider>
               </ExpressionOrigin>
             </CodeExpression>
@@ -352,11 +349,11 @@
             <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
           </StatementProvider>
           <Parameters>
-            <CodeExpression id="14_radiumTextField">
-              <CodeVariable name="radiumTextField" type="8194" declaredType="javax.swing.JTextField"/>
+            <CodeExpression id="14_radiusTextField">
+              <CodeVariable name="radiusTextField" type="8194" declaredType="javax.swing.JTextField"/>
               <ExpressionOrigin>
                 <ExpressionProvider type="ComponentRef">
-                  <ComponentRef name="radiumTextField"/>
+                  <ComponentRef name="radiusTextField"/>
                 </ExpressionProvider>
               </ExpressionOrigin>
             </CodeExpression>
